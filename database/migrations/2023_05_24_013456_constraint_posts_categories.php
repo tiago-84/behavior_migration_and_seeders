@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->unsignedInteger('category');
-
             $table->foreign('category')->references('id')->on('categories')->onDelete('cascade');
         });
     }
@@ -24,6 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign('posts_category_foreign');
             $table->dropColumn('category');
         });
     }
